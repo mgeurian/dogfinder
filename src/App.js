@@ -1,15 +1,32 @@
 import './App.css';
+import { BrowserRouter, Route, Redirect } from "react-router-dom";
+import FindDogDetails from './FindDogDetails';
+import DogList from './DogList';
+import duke from './images/duke.jpg'
+import perry from './images/perry.jpg'
+import tubby from './images/tubby.jpg'
+import whiskey from './images/whiskey.jpg'
 
-function App() {
+function App({dogs}) {
+
+  // I tried to filter dog details here using useParams, but couldn't get it to work. I'd like to work on doing that in our next call. Getting things to work before refactoring and creating more Files. Is it easier to break up stuff into separate files, or should that come later? I want to build stuff then make it better later. But relied on the FilterDogDetails component of the solution to complete this.
+
+
   return (
-    <div className="App">
+    <BrowserRouter>
+        <Route exact path="/dogs" >
+          <DogList dogs={dogs}/>
+        </Route>
+        <Route path="/dogs/:name" >
+          <FindDogDetails dogs={dogs} />
+        </Route>
+        <Redirect to="/dogs" />
+    </BrowserRouter>
 
-    </div>
   );
-}
+};
 
-App.defaultProps = {
-  dogs: [
+export const dogs = [
     {
       name: "Whiskey",
       age: 5,
@@ -50,7 +67,10 @@ App.defaultProps = {
         "Angelina used to hate Tubby, but claims not to anymore."
       ]
     }
-  ]
-}
+  ];
+
+App.defaultProps = { dogs };
 
 export default App;
+
+
