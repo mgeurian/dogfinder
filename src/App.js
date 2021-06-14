@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 import FindDogDetails from './FindDogDetails';
 import DogList from './DogList';
 import duke from './images/duke.jpg'
@@ -14,6 +14,7 @@ function App({dogs}) {
 
   return (
     <BrowserRouter>
+      <Switch>
         <Route exact path="/dogs" >
           <DogList dogs={dogs}/>
         </Route>
@@ -21,6 +22,7 @@ function App({dogs}) {
           <FindDogDetails dogs={dogs} />
         </Route>
         <Redirect to="/dogs" />
+      </Switch>
     </BrowserRouter>
 
   );
